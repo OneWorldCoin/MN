@@ -66,7 +66,7 @@ Do not close your terminal/ command prompt window at this point.
 
 ***Go back to Putty***
 
-   :arrow_forward: `./oneworld-cli masternode status`
+   :arrow_forward: `oneworld-cli masternode status`
 
 You need to get **"status" : 4**
 
