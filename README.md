@@ -29,16 +29,11 @@ You will then receive your private key, save it in a txt to use it later.
 
 * Once logged in your vps, *copy/past* each line one by one with *Enter*
 
-	:arrow_forward: `wget -q https://github.com/OneWorldCoin/owo/releases/download/initial/owo-mn.sh`
+	:arrow_forward: `wget -q https://github.com/OneWorldCoin/MN/raw/master/OWO_MN.sh`
 
-	:arrow_forward: `bash owo-mn.sh`
+	:arrow_forward: `bash OWO_MN.sh`
 
-
-* Let this run, and when it ask you to install dependencies, if you're not sure press ***y*** and then enter
-
-* It will take some time and then will ask to compile the Daemon, press ***y*** and then enter 
-
-* Last thing script will ask you is to provide Masternode Genkey. Copy the one you got previously (masternode genkey) and press enter.
+* Let this run, and when prompted for a masternode key, copy the one you got previously (masternode genkey) and press enter.
 
 Remember to do `oneworld-cli getblockcount` to check if VPS synced with chain
 
@@ -51,12 +46,16 @@ Do not close your terminal/ command prompt window at this point.
 **ALIAS VPS_IP**:32112 **masternodeprivkey TXhash Output**
 
 		Example:
-		MN1 125.67.32.10:29711 w8723KqiiqtiLH6y2ktjfwzuSrNucGAbagpmTmCn1KnNEeQTJKf
+		MN1 125.67.32.10:32112 w8723KqiiqtiLH6y2ktjfwzuSrNucGAbagpmTmCn1KnNEeQTJKf
 		12fce79c1a5623aa5b5830abff1a9feb6a682b75ee9fe22c647725a3gef42saa 0
 
 * Close and Re-open Local Wallet, and at Masternode Tab you will find your MN with status MISSING
 
 ***(For the next steps you need to have already 21 confirmation on “Payment to yourself “ created in first step)***
+
+* Still on Masternode tab right click on the line of the MN with status MISSING and choose "Start Alias" for your Masternode change the status to ENABLE
+
+NOTE: If for some reason the previous method doesn't work please do the follow
 
 * Go to Debug Console type the following: ***startmasternode alias 0 (mymnalias)***
 
