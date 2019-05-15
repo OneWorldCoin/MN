@@ -8,7 +8,7 @@ COIN_CLI='oneworld-cli'
 COIN_PATH='/usr/local/bin/'
 COIN_TGZ='https://github.com/OneWorldCoin/owo/releases/download/V2.0/daemon+cli.zip'
 COIN_ZIP=$(echo $COIN_TGZ | awk -F'/' '{print $NF}')
-COIN_NAME='oneworld'
+COIN_NAME='Oneworld'
 COIN_EXPLORER='https://owo.ccore.online/'
 COIN_PORT=32112
 RPC_PORT=32113
@@ -57,7 +57,7 @@ function download_node() {
   compile_error
   unzip $COIN_ZIP >/dev/null 2>&1
   compile_error
-  cd linux
+  
   chmod +x $COIN_DAEMON
   chmod +x $COIN_CLI
   cp $COIN_DAEMON $COIN_PATH
@@ -96,10 +96,31 @@ StartLimitBurst=5
 WantedBy=multi-user.target
 EOF
 
+  echo
+  echo -e "$COIN_NAME Masternode is up and running listening on port ${GREEN}$COIN_PORT${NC}."
+  sleep 5
+  echo 
+  echo -e "Downloading bootstrap for faster sync"
+  wget -q https://github.com/OneWorldCoin/Bootstrap/releases/download/v1.0/bootstrap.zip -O /tmp/bootstrap.zip 
+  echo
+  echo -e "Installing the bootstrap "
+  unzip -qqo /tmp/bootstrap.zip -d /root/.oneworld/
+  sleep 3
+  rm -rf /tmp/bootstrap.zip
+  sleep 3
+  echo 
   systemctl daemon-reload
   sleep 3
   systemctl start $COIN_NAME.service
   systemctl enable $COIN_NAME.service >/dev/null 2>&1
+  echo Loading Block Index...
+  sleep 5
+  echo This step can take between 1 to 2 minuts to load
+  sleep 2
+  echo depending the amount of blocks at bootstrap
+  sleep 5 
+  echo 
+
 
   if [[ -z "$(ps axo cmd:100 | egrep $COIN_DAEMON)" ]]; then
     echo -e "${RED}$COIN_NAME is not running${NC}, please investigate. You should start by running the following commands as root:"
@@ -272,17 +293,22 @@ function important_information() {
 ${NC}
 \t       Masternode Script
 \t ***************************\n\n"
- echo -e "$COIN_NAME Masternode is up and running listening on port ${GREEN}$COIN_PORT${NC}."
+ sleep 3
  echo -e "Configuration file is: ${RED}$CONFIGFOLDER/$CONFIG_FILE${NC}"
+ sleep 3
  echo -e "Start: ${RED}systemctl start $COIN_NAME.service${NC}"
  echo -e "Stop: ${RED}systemctl stop $COIN_NAME.service${NC}"
  echo -e "Check Status: ${RED}systemctl status $COIN_NAME.service${NC}"
+ sleep 3
  echo -e "VPS_IP:PORT ${GREEN}$NODEIP:$COIN_PORT${NC}"
  echo -e "MASTERNODE GENKEY is: ${RED}$COINKEY${NC}"
+ sleep 3
  echo -e "Check ${RED}$COIN_CLI getblockcount${NC} and compare to ${GREEN}$COIN_EXPLORER${NC}."
  echo -e "Check ${GREEN}Collateral${NC} already full confirmed and start masternode."
  echo -e "Use ${RED}$COIN_CLI masternode status${NC} to check your MN Status."
  echo -e "Use ${RED}$COIN_CLI help${NC} for help."
+ sleep 3
+ echo
  if [[ -n $SENTINEL_REPO  ]]; then
  echo -e "${RED}Sentinel${NC} is installed in ${RED}/root/sentinel_$COIN_NAME${NC}"
  echo -e "Sentinel logs is: ${RED}$CONFIGFOLDER/sentinel.log${NC}"
@@ -296,8 +322,8 @@ function setup_node() {
   update_config
   enable_firewall
   #install_sentinel
-  important_information
   configure_systemd
+  important_information
 }
 
 
