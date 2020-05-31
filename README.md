@@ -3,23 +3,23 @@
 # One World Masternode Setup Guide (Ubuntu 16.04)
 ***
 ## Required
-1) **100000 OWO coins**
-2) **Local Wallet https://github.com/OneWorldCoin/owo/releases**
+1) **500000 OWO coins**
+2) **Local Wallet https://github.com/OneWorldCoin/OneWorld/releases**
 3) **VPS with UBUNTU 16.04**
 4) **Putty https://www.putty.org/**
 5) **Text editor on your local pc to save data for copy/paste**
 ***
 
 ***On your Local Wallet***
-* Create an address with a label MN1 and send exactly 100000 OWO to it. Wait to complete 6 confirmations on “ Payment to yourself “ created.
+* Create an address with a label MN1 and send exactly 500000 OWO to it. Wait to complete 6 confirmations on “ Payment to yourself “ created.
 
-* Open the Debug Console ( Tools – Debug Console ) and type ***masternode genkey***.
+* Open the Debug Console ( Tools – Debug Console ) and type ***createmasternodekey***.
 You will then receive your private key, save it in a txt to use it later.
   ```
   Example:
-          masternode genkey
+          createmasternodekey
           w8723KqiiqtiLH6y2ktjfwzuSrNucGAbagpmTmCn1KnNEeQTJKf
-* Still at Debug Console type ***masternode outputs*** and save txhash and outputidx on a txt
+* Still at Debug Console type ***getmasternodeoutputs*** and save txhash and outputidx on a txt
   ```
   Exemple:
           "txhash" : "12fce79c1a5623aa5b5830abff1a9feb6a682b75ee9fe22c647725a3gef42saa",
@@ -35,7 +35,7 @@ You will then receive your private key, save it in a txt to use it later.
 
 * Let this run, and when prompted for a masternode key, copy the one you got previously (masternode genkey) and press enter.
 
-Remember to do `oneworld-cli getblockcount` to check if VPS synced with chain
+Remember to do `OneWorld-cli getblockcount` to check if VPS synced with chain
 
 Do not close your terminal/ command prompt window at this point.
 
@@ -65,7 +65,7 @@ NOTE: If for some reason the previous method doesn't work please do the follow
 
 ***Go back to Putty***
 
-   :arrow_forward: `oneworld-cli masternode status`
+   :arrow_forward: `OneWorld-cli getmasternodestatus`
 
 You need to get **"status" : 4**
 
